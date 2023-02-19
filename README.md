@@ -1,2 +1,2 @@
-# mqtt-podman-demo
-mqtt-podman-demo
+# mqtt_podman_demo
+mqtt podman demo

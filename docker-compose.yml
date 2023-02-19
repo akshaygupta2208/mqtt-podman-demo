@@ -1,0 +1,35 @@
+version : '3'
+services:
+  mosquitto:
+    image: eclipse-mosquitto:2
+    volumes:
+      # - ./config/:/mosquitto/config/
+      # - ./log/:/mosquitto/log/
+      # - ./data/:/mosquitto/data/
+      - ./mosquitto:/mosquitto
+    ports:
+      - 1883:1883
+      - 9001:9001
+    # environment:
+    #   - MQTT_BROKER_HOST=127.0.0.1
+    #   - MQTT_BROKER_PORT=1883
+  mqtt_podman_publisher:
+    image: saxenapawan800/mqtt-podman-publisher:v1.0.0
+    # ports:
+    #   # - 3000:3000
+    #   # - 1883:1883
+    #   # - 8080:8080
+    #   # - 80:80
+    environment:
+      - MQTT_BROKER_HOST=mqtt_podman_demo-mosquitto-1
+      - MQTT_BROKER_PORT=1883
+  mqtt_podman_subscriber:
+    image: saxenapawan800/mqtt-podman-subscriber:v1.0.0
+    # ports:
+    #   # - 3001:3000
+    #   # - 1884:1883
+    #   # - 8080:8080
+    #   # - 80:80
+    environment:
+      - MQTT_BROKER_HOST=mqtt_podman_demo-mosquitto-1
+      - MQTT_BROKER_PORT=1883
